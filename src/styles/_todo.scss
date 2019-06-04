@@ -1,0 +1,37 @@
+
+.textFieldGrid{
+    margin-top: 24px !important;
+}
+.buttonGrid{
+    margin-top: 24px !important;
+}
+.root{
+    margin: 20px !important;
+    
+    > .list{
+        text-align: center !important;
+        display: flex;
+        align-items: center;
+    }
+}
+.todoList{
+    color: cornflowerblue;
+    font-weight: 800;
+    text-align: center;
+    align-self: center;
+}
+.filterContainer{
+ text-align: center;
+ margin: 12%;
+}
+.filter{
+    font-size: 1.25rem;
+    padding: 10px;
+}
+.filter.active{
+    text-decoration: underline;
+    color: cornflowerblue;
+}
+.noBorder{
+    border: 0 !important;
+}
