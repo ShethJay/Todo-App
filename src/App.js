@@ -1,15 +1,14 @@
 import React from 'react';
-import {Provider} from 'react-redux';
+import { Provider } from 'react-redux';
 import reduxStore from './store';
-import Todo from './modules/todos/components/Todo';
-
+import Todo from './modules/todos/components/todos-section/Todo';
 
 function App() {
   return (
     <Provider store={reduxStore}>
-    <div className="App">
-      <Todo />
-    </div>
+      <div className="App">
+        <Todo />
+      </div>
     </Provider>
   );
 }
