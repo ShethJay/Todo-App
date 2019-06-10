@@ -9,7 +9,7 @@ const Header = ({ selectedTab, handleChange }) => (
   <AppBar position="static" color="default" className="tabs-menu">
     <Tabs
       value={selectedTab}
-      onChange={event => handleChange(event)}
+      onChange={handleChange}
       indicatorColor="primary"
       textColor="primary"
       variant="fullWidth"
