@@ -10,14 +10,14 @@ const AddTodos = ({
   handleClose,
   isDialogOpen,
 }) => (
-  <div>
-    <div className="add-todo-icon">
-      <Fab className="" color="primary">
-        <AddIcon onClick={handleClickOpen} />
-      </Fab>
-      <AddTodosDialogBox handleClose={handleClose} isDialogOpen={isDialogOpen} />
-    </div>
+
+  <div className="add-todo-icon">
+    <Fab className="" color="primary">
+      <AddIcon onClick={handleClickOpen} />
+    </Fab>
+    <AddTodosDialogBox handleClose={handleClose} isDialogOpen={isDialogOpen} />
   </div>
+
 );
 AddTodos.propTypes = {
   handleClickOpen: PropTypes.func,

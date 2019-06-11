@@ -16,7 +16,7 @@ const AddTodoInput = ({
       autoFocus
       id="name"
       label="Enter Todos"
-      className="textField"
+      className="add-todo-input"
       margin="dense"
       value={title}
       onChange={onInputChange}
@@ -25,7 +25,7 @@ const AddTodoInput = ({
       helperText={helperText}
       error={helperText.length !== 0}
     />
-    <Button variant="contained" onClick={onAddTodoClick}>
+    <Button variant="contained" onClick={onAddTodoClick} className="add-todo-button">
       Add Todo
     </Button>
   </div>
