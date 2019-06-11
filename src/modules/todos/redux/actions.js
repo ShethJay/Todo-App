@@ -22,3 +22,9 @@ export const onTabClick = tabValue => ({
   payload: tabValue,
 
 });
+export const closeDialog = () => ({
+  type: actionTypes.CLOSE_DIALOG,
+});
+export const openDialog = () => ({
+  type: actionTypes.OPEN_DIALOG,
+});

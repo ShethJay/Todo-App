@@ -6,3 +6,5 @@ export const SHOW_ALL = 'SHOW_ALL';
 export const IS_ACTIVE = 'IS_ACTIVE';
 export const IS_COMPLETE = 'IS_COMPLETE';
 export const ON_TAB_CLICK = 'ON_TAB_CLICK';
+export const CLOSE_DIALOG = 'CLOSE_DIALOG';
+export const OPEN_DIALOG = 'OPEN_DIALOG';

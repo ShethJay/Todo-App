@@ -6,7 +6,7 @@ import Todos from './Todos';
 const TodosContainer = ({ selectedTab }) => (<Todos selectedTab={selectedTab} />);
 
 const mapStateToPros = state => ({
-  selectedTab: state.todo.selectedTab,
+  selectedTab: state.todos.selectedTab,
 });
 TodosContainer.propTypes = {
   selectedTab: PropTypes.number,

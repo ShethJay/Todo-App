@@ -29,10 +29,10 @@ class DoneTodosListContainer extends Component {
   }
 
   render() {
-    const { todo } = this.props;
+    const { todos } = this.props;
     return (
       <DoneTodosList
-        todo={todo}
+        todos={todos}
         onCheckTodo={this.onCheckTodo}
         onDeleteTodo={this.onDeleteTodo}
       />
@@ -41,14 +41,14 @@ class DoneTodosListContainer extends Component {
 }
 DoneTodosListContainer.propTypes = {
   updateTodo: PropTypes.func,
-  todo: PropTypes.arrayOf(PropTypes.object),
+  todos: PropTypes.arrayOf(PropTypes.object),
 };
 DoneTodosListContainer.defaultProps = {
   updateTodo: noop,
-  todo: [],
+  todos: [],
 };
 const mapStateToPros = state => ({
-  todo: state.todo.todo,
+  todos: state.todos.todos,
 
 });
 const mapDisptachToProps = dispatch => ({

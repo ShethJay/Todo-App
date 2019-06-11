@@ -10,20 +10,20 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import PropTypes from 'prop-types';
 import { noop } from '../../../../utils';
 
-const DoneTodosList = ({ todo, onCheckTodo, onDeleteTodo }) => (
+const DoneTodosList = ({ todos, onCheckTodo, onDeleteTodo }) => (
   <div className="list">
     <Table size="small">
       <TableBody>
-        {todo.length > 0
-        && todo
-          .filter(todos => !todos.isRemoved)
-          .filter(todos => todos.isDone)
-          .map(todos => (
-            <TableRow key={todos.id} className="todo-row">
+        {todos.length > 0
+        && todos
+          .filter(todo => !todo.isRemoved)
+          .filter(todo => todo.isDone)
+          .map(todo => (
+            <TableRow key={todo.id} className="todo-row">
               <TableCell className="noBorder checkBox" size="small">
                 <Checkbox
-                  onChange={e => onCheckTodo(todos.id, e)}
-                  checked={todos.isDone}
+                  onChange={e => onCheckTodo(todo.id, e)}
+                  checked={todo.isDone}
                   value="checkedB"
                   color="primary"
                   fontSize="small"
@@ -34,14 +34,14 @@ const DoneTodosList = ({ todo, onCheckTodo, onDeleteTodo }) => (
                   variant="body1"
                   word-wrap="break-word"
                 >
-                  {todos.title}
+                  {todo.title}
                 </Typography>
               </TableCell>
 
               <TableCell className="noBorder del-button" size="small">
                 <IconButton
                   aria-label="Delete"
-                  onClick={() => onDeleteTodo(todos.id)}
+                  onClick={() => onDeleteTodo(todo.id)}
                 >
                   <DeleteIcon
                     variant="contained"

@@ -32,7 +32,7 @@ HeaderContainer.defaultProps = {
   selectedTab: 0,
 };
 const mapStateToPros = state => ({
-  selectedTab: state.todo.selectedTab,
+  selectedTab: state.todos.selectedTab,
 });
 const mapDisptachToProps = dispatch => ({
   onTabClick: tabValue => dispatch(actions.onTabClick(tabValue)),

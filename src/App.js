@@ -1,13 +1,13 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import reduxStore from './store';
-import Todo from './modules/todos/components/todos-section/Todo';
+import { TodosContainer } from './modules/todos';
 
 function App() {
   return (
     <Provider store={reduxStore}>
       <div className="App">
-        <Todo />
+        <TodosContainer />
       </div>
     </Provider>
   );
