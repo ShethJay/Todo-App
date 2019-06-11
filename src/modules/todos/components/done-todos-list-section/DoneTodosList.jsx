@@ -1,67 +1,27 @@
 import React from 'react';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableRow from '@material-ui/core/TableRow';
-import Checkbox from '@material-ui/core/Checkbox';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import DeleteIcon from '@material-ui/icons/Delete';
 import PropTypes from 'prop-types';
-import { noop } from '../../../../utils';
+import DisplayTodosContainer from '../display-todos-section/DisplayTodosContainer';
 
-const DoneTodosList = ({ todos, onCheckTodo, onDeleteTodo }) => (
+const DoneTodosList = ({ todos }) => (
   <div className="list">
     <Table size="small">
       <TableBody>
         {todos.length > 0
         && todos
-          .filter(todo => !todo.isRemoved)
           .filter(todo => todo.isDone)
           .map(todo => (
-            <TableRow key={todo.id} className="todo-row">
-              <TableCell className="noBorder checkBox" size="small">
-                <Checkbox
-                  onChange={e => onCheckTodo(todo.id, e)}
-                  checked={todo.isDone}
-                  value="checkedB"
-                  color="primary"
-                  fontSize="small"
-                />
-              </TableCell>
-              <TableCell className="noBorder todo-title" size="small" component="td" scope="row">
-                <Typography
-                  variant="body1"
-                  word-wrap="break-word"
-                >
-                  {todo.title}
-                </Typography>
-              </TableCell>
-
-              <TableCell className="noBorder del-button" size="small">
-                <IconButton
-                  aria-label="Delete"
-                  onClick={() => onDeleteTodo(todo.id)}
-                >
-                  <DeleteIcon
-                    variant="contained"
-                  />
-                </IconButton>
-              </TableCell>
-            </TableRow>
+            <DisplayTodosContainer todo={todo} key={todo.id} />
           ))}
       </TableBody>
     </Table>
   </div>
 );
 DoneTodosList.propTypes = {
-  todo: PropTypes.instanceOf(Array),
-  onCheckTodo: PropTypes.func,
-  onDeleteTodo: PropTypes.func,
+  todos: PropTypes.instanceOf(Array),
 };
 DoneTodosList.defaultProps = {
-  todo: [],
-  onCheckTodo: noop,
-  onDeleteTodo: noop,
+  todos: [],
 };
 export default DoneTodosList;

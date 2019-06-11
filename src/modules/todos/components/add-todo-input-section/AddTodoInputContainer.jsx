@@ -14,6 +14,7 @@ class AddTodoInputContainer extends Component {
     };
     this.onInputChange = this.onInputChange.bind(this);
     this.onKeyUp = this.onKeyUp.bind(this);
+    this.onAddTodoClick = this.onAddTodoClick.bind(this);
   }
 
   onInputChange(e) {
@@ -35,20 +36,35 @@ class AddTodoInputContainer extends Component {
     const { keyCode } = e;
     const { title } = this.state;
     const { addTodo, closeDialog } = this.props;
-    if (keyCode === 13 && title !== '') {
+    if (keyCode === 13 && title.trim() !== '') { // keyCode = 13 => Enter key
       addTodo(title);
       closeDialog();
       this.setState({
         title: '',
         helperText: '',
       });
-    } else if (keyCode === 13 && title === '') {
+    } else if (keyCode === 13 && title.trim() === '') {
       this.setState({ helperText: 'Todo cannot be blank' });
     }
-    if (keyCode === 27) {
+    if (keyCode === 27) { // keyCode = 27 => Esc key
       this.setState({
         title: '',
       });
+    }
+  }
+
+  onAddTodoClick() {
+    const { title } = this.state;
+    const { addTodo, closeDialog } = this.props;
+    if (title.trim() !== '') {
+      addTodo(title);
+      closeDialog();
+      this.setState({
+        title: '',
+        helperText: '',
+      });
+    } else if (title.trim() === '') {
+      this.setState({ helperText: 'Todo cannot be blank' });
     }
   }
 
@@ -60,6 +76,7 @@ class AddTodoInputContainer extends Component {
         onInputChange={this.onInputChange}
         onKeyUp={this.onKeyUp}
         helperText={helperText}
+        onAddTodoClick={this.onAddTodoClick}
       />
     );
   }

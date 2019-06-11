@@ -3,6 +3,7 @@ import rootReducer from './rootReducer';
 import { loadState, saveState } from './localStorage';
 
 const persistedState = loadState();
+
 const reduxStore = createStore(
   rootReducer,
   persistedState,
@@ -14,7 +15,7 @@ const reduxStore = createStore(
 
 reduxStore.subscribe(() => {
   saveState({
-    todos: reduxStore.getState().todos,
+    todo: reduxStore.getState().todo,
   });
 });
 

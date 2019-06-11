@@ -10,7 +10,7 @@ const AddTodos = ({
   handleClose,
   isDialogOpen,
 }) => (
-  <div className="footer">
+  <div>
     <div className="add-todo-icon">
       <Fab className="" color="primary">
         <AddIcon onClick={handleClickOpen} />

@@ -35,13 +35,6 @@ export default (state = initialState, { type, payload }) => {
           ? { ...todo, isDone: payload.isChecked }
           : todo)),
       };
-    case actionTypes.UPDATE_TODO:
-      return {
-        ...state,
-        // todo: state.todo.filter(todo => todo.id !== payload),
-        todos: state.todos.map(todo => (todo.id === payload.id ? { ...todo, ...payload.todo }
-          : todo)),
-      };
     case actionTypes.ON_TAB_CLICK:
       return {
         ...state,
@@ -57,6 +50,13 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         isDialogOpen: true,
       };
+      // case actionTypes.UPDATE_TODO:
+      // return {
+      //   ...state,
+      //    todo: state.todo.filter(todo => todo.id !== payload),
+      //   todos: state.todos.map(todo => (todo.id === payload.id ? { ...todo, ...payload.todo }
+      //     : todo)),
+      // };
     default:
       return state;
   }

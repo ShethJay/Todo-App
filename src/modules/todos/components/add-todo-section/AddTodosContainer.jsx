@@ -44,7 +44,7 @@ AddTodosContainer.defaultProps = {
   isDialogOpen: false,
 };
 const mapStateToPros = state => ({
-  isDialogOpen: state.todos.isDialogOpen,
+  isDialogOpen: state.todo.isDialogOpen,
 });
 const mapDisptachToProps = dispatch => ({
   openDialog: () => dispatch(actions.openDialog()),

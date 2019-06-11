@@ -1,6 +1,7 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import PropTypes from 'prop-types';
+import Button from '@material-ui/core/Button';
 import { noop } from '../../../../utils';
 
 const AddTodoInput = ({
@@ -8,30 +9,39 @@ const AddTodoInput = ({
   onInputChange,
   onKeyUp,
   helperText,
+  onAddTodoClick,
 }) => (
-  <TextField
-    autoFocus
-    id="name"
-    label="Enter Todos"
-    className="textField"
-    margin="dense"
-    value={title}
-    onChange={onInputChange}
-    onKeyUp={onKeyUp}
-    fullWidth
-    helperText={helperText}
-    error={helperText.length !== 0}
-  />
+  <div className="add-todo-div">
+    <TextField
+      autoFocus
+      id="name"
+      label="Enter Todos"
+      className="textField"
+      margin="dense"
+      value={title}
+      onChange={onInputChange}
+      onKeyUp={onKeyUp}
+      fullWidth
+      helperText={helperText}
+      error={helperText.length !== 0}
+    />
+    <Button variant="contained" onClick={onAddTodoClick}>
+      Add Todo
+    </Button>
+  </div>
 );
 AddTodoInput.propTypes = {
-  onKeyUp: PropTypes.func,
+  title: PropTypes.string,
   onInputChange: PropTypes.func,
-  title: PropTypes.string.isRequired,
+  onKeyUp: PropTypes.func,
   helperText: PropTypes.string,
+  onAddTodoClick: PropTypes.func,
 };
 AddTodoInput.defaultProps = {
-  onKeyUp: noop,
+  title: '',
   onInputChange: noop,
+  onKeyUp: noop,
   helperText: '',
+  onAddTodoClick: noop,
 };
 export default AddTodoInput;
