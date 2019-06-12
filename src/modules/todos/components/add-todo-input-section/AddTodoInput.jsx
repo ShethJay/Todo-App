@@ -1,7 +1,8 @@
 import React from 'react';
-import TextField from '@material-ui/core/TextField';
 import PropTypes from 'prop-types';
+import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+
 import { noop } from '../../../../utils';
 
 const AddTodoInput = ({
@@ -30,6 +31,7 @@ const AddTodoInput = ({
     </Button>
   </div>
 );
+
 AddTodoInput.propTypes = {
   title: PropTypes.string,
   onInputChange: PropTypes.func,
@@ -37,6 +39,7 @@ AddTodoInput.propTypes = {
   helperText: PropTypes.string,
   onAddTodoClick: PropTypes.func,
 };
+
 AddTodoInput.defaultProps = {
   title: '',
   onInputChange: noop,
@@ -44,4 +47,5 @@ AddTodoInput.defaultProps = {
   helperText: '',
   onAddTodoClick: noop,
 };
+
 export default AddTodoInput;

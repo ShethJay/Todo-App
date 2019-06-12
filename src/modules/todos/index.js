@@ -1,7 +1,9 @@
 import TodosContainer from './components/TodosContainer';
+import todoReducer from './redux/reducer';
+import AddTodoDialog from './components/add-todo-input-section/AddTodosDialogBox';
 
-const fake = '';
 export {
   TodosContainer,
-  fake,
+  todoReducer,
+  AddTodoDialog,
 };

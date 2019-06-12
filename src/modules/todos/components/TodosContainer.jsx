@@ -1,17 +1,26 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+
 import Todos from './Todos';
 
-const TodosContainer = ({ selectedTab }) => (<Todos selectedTab={selectedTab} />);
+const TodosContainer = ({ todos, selectedTab }) => (
+  <Todos selectedTab={selectedTab} todos={todos} />
+);
+
+TodosContainer.propTypes = {
+  todos: PropTypes.arrayOf(PropTypes.object),
+  selectedTab: PropTypes.number,
+};
+
+TodosContainer.defaultProps = {
+  todos: [],
+  selectedTab: 0,
+};
 
 const mapStateToPros = state => ({
   selectedTab: state.todo.selectedTab,
+  todos: state.todo.todos,
 });
-TodosContainer.propTypes = {
-  selectedTab: PropTypes.number,
-};
-TodosContainer.defaultProps = {
-  selectedTab: 0,
-};
-export default connect(mapStateToPros, null)(TodosContainer);
+
+export default connect(mapStateToPros)(TodosContainer);

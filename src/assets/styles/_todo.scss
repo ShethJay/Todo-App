@@ -1,64 +1,57 @@
-
 body {
   background-color: $light-background-color;
-  .todo-outer {
-    flex: 1 1 auto;
-    overflow-y: auto;
-    overflow-x: hidden;
-    padding: 20px 0;
+  .todos-container {
+    display: flex;
     text-align: center;
-    .todo-wrapper {
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    .todos {
       max-width: 330px;
       height: 675px;
       background-color: $light-background;
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      margin: auto;
+      position: relative;
+      margin: 90px auto;
       border-radius: 36px;
+      overflow: hidden;
       box-shadow: 7px 7px 20px -12px rgba(0, 0, 0, 1);
-      .tabs-menu {
-        border-top-left-radius: 36px 36px;
-        border-top-right-radius: 36px 36px;
-        .tab-title {
-          font-size: 20px;
-        }
+      .tab-title {
+        font-size: 20px;
       }
-      .list {
+      .todos-list {
         max-height: 580px;
         overflow-y: scroll;
-        .todo-row {
+        .todos-row {
           &:hover {
             background-color: $light-background-color;
           }
-          .noBorder {
+          .remove-padding {
             padding: 0;
-          }
-          .noBorder.doneCheckBox {
-            width: 45px;
-            > span {
-              color: $primary-color;
-            }
-          }
-          .noBorder.todo-title {
-            > p {
-              width: 210px;
-              word-wrap: break-word;
-            }
-          }
-          .noBorder.del-button {
-            text-align: right;
-            padding-right: 10px;
-            > button {
-              &:hover {
-                background-color: $primary-color;
-              }
+            &.todos-done-checkbox {
+              width: 45px;
               > span {
-                > svg {
-                  &:hover {
-                    color: $dark-background-900
+                color: $primary-color;
+              }
+            }
+            &.todos-title-input {
+              > p {
+                width: 210px;
+                word-wrap: break-word;
+              }
+            }
+            &.todos-delete-button {
+              text-align: right;
+              padding-right: 10px;
+              > button {
+                &:hover {
+                  background-color: $primary-color;
+                }
+                > span {
+                  > svg {
+                    &:hover {
+                      color: $dark-background-900;
+                    }
                   }
                 }
               }
@@ -66,7 +59,7 @@ body {
           }
         }
       }
-      .add-todo-icon {
+      .add-todos-icon {
         position: absolute;
         bottom: 55px;
         right: 20px;
@@ -94,23 +87,22 @@ body {
       }
     }
   }
- 
-  .todo-input-dialog {
-    width: 280px;
+
+  .add-todos-dialog {
+    width: 265px;
     .add-todo-div {
       text-align: center;
-      .add-todo-input{
+      .add-todo-input {
         margin-bottom: 10px;
         input {
           font-size: 20px;
         }
       }
-      .add-todo-button{
+      .add-todo-button {
         background-color: $primary-color;
         color: $light-background;
         font-size: 18px;
         font-weight: 600;
-
       }
     }
   }

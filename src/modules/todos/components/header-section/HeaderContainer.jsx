@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+
 import Header from './Header';
 import * as actions from '../../redux/actions';
 import { noop } from '../../../../utils';
 
 class HeaderContainer extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(event, newValue) {
-    const { onTabClick } = this.props;
-    onTabClick(newValue);
+    const { changeSelectedTab } = this.props;
+    changeSelectedTab(newValue);
   }
 
   render() {
@@ -23,18 +24,23 @@ class HeaderContainer extends Component {
     );
   }
 }
+
 HeaderContainer.propTypes = {
-  onTabClick: PropTypes.func,
+  changeSelectedTab: PropTypes.func,
   selectedTab: PropTypes.number,
 };
+
 HeaderContainer.defaultProps = {
-  onTabClick: noop,
+  changeSelectedTab: noop,
   selectedTab: 0,
 };
+
 const mapStateToPros = state => ({
   selectedTab: state.todo.selectedTab,
 });
+
 const mapDisptachToProps = dispatch => ({
-  onTabClick: tabValue => dispatch(actions.onTabClick(tabValue)),
+  changeSelectedTab: tabValue => dispatch(actions.changeSelectedTab(tabValue)),
 });
+
 export default connect(mapStateToPros, mapDisptachToProps)(HeaderContainer);

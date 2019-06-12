@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+
 import AddTodoInput from './AddTodoInput';
 import * as actions from '../../redux/actions';
+import { ADD_TODO_DIALOG } from '../../../../shared/dialogNames';
 import { noop } from '../../../../utils';
 
 class AddTodoInputContainer extends Component {
@@ -38,7 +40,7 @@ class AddTodoInputContainer extends Component {
     const { addTodo, closeDialog } = this.props;
     if (keyCode === 13 && title.trim() !== '') { // keyCode = 13 => Enter key
       addTodo(title);
-      closeDialog();
+      closeDialog(ADD_TODO_DIALOG);
       this.setState({
         title: '',
         helperText: '',
@@ -58,7 +60,7 @@ class AddTodoInputContainer extends Component {
     const { addTodo, closeDialog } = this.props;
     if (title.trim() !== '') {
       addTodo(title);
-      closeDialog();
+      closeDialog(ADD_TODO_DIALOG);
       this.setState({
         title: '',
         helperText: '',
@@ -81,10 +83,12 @@ class AddTodoInputContainer extends Component {
     );
   }
 }
+
 AddTodoInputContainer.propTypes = {
   addTodo: PropTypes.func,
   closeDialog: PropTypes.func,
 };
+
 AddTodoInputContainer.defaultProps = {
   addTodo: noop,
   closeDialog: noop,
@@ -92,7 +96,7 @@ AddTodoInputContainer.defaultProps = {
 
 const mapDisptachToProps = dispatch => ({
   addTodo: title => dispatch(actions.addTodo(title)),
-  closeDialog: () => dispatch(actions.closeDialog()),
+  closeDialog: dialogName => dispatch(actions.closeDialog(dialogName)),
 });
 
 export default connect(null, mapDisptachToProps)(AddTodoInputContainer);
