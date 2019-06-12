@@ -1,0 +1,18 @@
+.add-todo-div {
+  text-align: center;
+
+  .add-todo-input {
+    margin-bottom: 10px;
+
+    input {
+      font-size: 20px;
+    }
+  }
+
+  .add-todo-button {
+    background-color: $primary-color;
+    color: $light-background;
+    font-size: 18px;
+    font-weight: 600;
+  }
+}

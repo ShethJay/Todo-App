@@ -1,0 +1,25 @@
+body {
+  background-color: $light-background-color;
+  .todos-container {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    .todos {
+      max-width: 330px;
+      height: 675px;
+      background-color: $light-background;
+      position: relative;
+      margin: 90px auto;
+      border-radius: 36px;
+      overflow: hidden;
+      box-shadow: 7px 7px 20px -12px rgba(0, 0, 0, 1);
+    }
+  }
+  ::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+}

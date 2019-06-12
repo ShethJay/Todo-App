@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import HeaderContainer from './header-section/HeaderContainer';
-import TodosListCotainer from './todos-list-section/TodosListContainer';
+import TodosListContainer from './todos-list-section/TodosListContainer';
 import AddTodosContainer from './add-todo-section/AddTodosContainer';
 import FooterContainer from './footer-section/FooterContainer';
 
@@ -10,9 +10,12 @@ const Todos = ({ todos, selectedTab }) => (
   <div className="todos-container">
     <div className="todos">
       <HeaderContainer />
-      <TodosListCotainer
-        todos={selectedTab === 0 ? todos.filter(todo => !todo.isDone)
-          : todos.filter(todo => todo.isDone)}
+      <TodosListContainer
+        todos={
+          selectedTab === 0
+            ? todos.filter(todo => !todo.isDone)
+            : todos.filter(todo => todo.isDone)
+        }
       />
       <AddTodosContainer />
       <FooterContainer />

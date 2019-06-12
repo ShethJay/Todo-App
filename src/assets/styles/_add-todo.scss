@@ -1,0 +1,19 @@
+.add-todos-icon {
+  position: absolute;
+  bottom: 55px;
+  right: 20px;
+
+  > button {
+    background-color: $primary-color;
+
+    &:hover {
+      background-color: $primary-color;
+    }
+
+    > span {
+      > svg {
+        font-size: 45px;
+      }
+    }
+  }
+}

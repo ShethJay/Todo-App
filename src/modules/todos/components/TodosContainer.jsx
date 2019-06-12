@@ -19,8 +19,8 @@ TodosContainer.defaultProps = {
 };
 
 const mapStateToPros = state => ({
-  selectedTab: state.todo.selectedTab,
   todos: state.todo.todos,
+  selectedTab: state.todo.selectedTab,
 });
 
 export default connect(mapStateToPros)(TodosContainer);

@@ -9,7 +9,6 @@ import * as actions from '../../redux/actions';
 import { noop } from '../../../../utils';
 import { ADD_TODO_DIALOG } from '../../../../shared/dialogNames';
 
-
 const AddTodosDialogBox = ({
   currentDialogNames,
   closeDialog,
@@ -34,10 +33,13 @@ AddTodosDialogBox.defaultProps = {
   closeDialog: noop,
   currentDialogNames: [],
 };
+
 const mapStateToProps = state => ({
   currentDialogNames: state.todo.currentDialogNames,
 });
+
 const mapDispatchToProps = dispatch => ({
   closeDialog: dialogName => dispatch(actions.closeDialog(dialogName)),
 });
+
 export default connect(mapStateToProps, mapDispatchToProps)(AddTodosDialogBox);
