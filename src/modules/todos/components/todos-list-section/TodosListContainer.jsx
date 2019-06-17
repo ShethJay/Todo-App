@@ -20,6 +20,11 @@ class TodosListCotainer extends Component {
     getTodosList();
   }
 
+  componentWillUnmount() {
+    const { flushTodosList } = this.props;
+    flushTodosList();
+  }
+
   onDeleteTodo(id) {
     const { removeTodo } = this.props;
     removeTodo(id);
@@ -39,7 +44,14 @@ class TodosListCotainer extends Component {
   // }
 
   render() {
-    const { todos, loading } = this.props;
+    const {
+      todos,
+      loading,
+      responseMessage,
+    } = this.props;
+    if (responseMessage !== '') {
+      alert(responseMessage);
+    }
     return (
       <TodosList
         todos={todos}
@@ -57,6 +69,8 @@ TodosListCotainer.propTypes = {
   todos: PropTypes.instanceOf(Object),
   getTodosList: PropTypes.func,
   loading: PropTypes.bool,
+  flushTodosList: PropTypes.func,
+  responseMessage: PropTypes.string,
 };
 
 TodosListCotainer.defaultProps = {
@@ -65,14 +79,21 @@ TodosListCotainer.defaultProps = {
   todos: {},
   getTodosList: noop,
   loading: false,
+  flushTodosList: noop,
+  responseMessage: '',
 };
+
 const mapStateToProps = state => ({
   loading: state.todo.requestState === RequestStates.loading,
+  isRequestSuccess: state.todo.requestState === RequestStates.success,
+  responseMessage: state.todo.responseMessage,
 });
+
 const mapDisptachToProps = dispatch => ({
   removeTodo: id => dispatch(actions.removeTodo(id)),
   checkTodo: (id, isChecked) => dispatch(actions.checkTodo(id, isChecked)),
   getTodosList: () => dispatch(actions.getTodosList()),
+  flushTodosList: () => dispatch(actions.flushTodosList()),
   // updateTodo: (id, todo) => dispatch(actions.updateTodo(id, todo)),
 });
 

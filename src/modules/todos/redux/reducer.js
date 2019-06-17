@@ -13,6 +13,7 @@ const initialState = {
   currentDialogNames: [],
   requestState: RequestStates.init,
   todosListError: null,
+  responseMessage: '',
 
 };
 
@@ -23,6 +24,7 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         requestState: RequestStates.loading,
         todosListError: null,
+        responseMessage: '',
       };
     }
     case actionTypes.ADD_TODO_SUCCESS: {
@@ -39,6 +41,7 @@ export default (state = initialState, { type, payload }) => {
         todos: todosList,
         requestState: RequestStates.success,
         todosListError: null,
+        responseMessage: 'Todo added succesfully',
       };
     }
     case actionTypes.ADD_TODO_ERROR: {
@@ -46,6 +49,7 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         requestState: RequestStates.error,
         todosListError: 'Unknown error',
+        responseMessage: 'Adding Todo Failed',
       };
     }
 
@@ -54,6 +58,7 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         requestState: RequestStates.loading,
         todosListError: null,
+        responseMessage: '',
       };
     }
     case actionTypes.REMOVE_TODO_SUCCESS: {
@@ -64,6 +69,7 @@ export default (state = initialState, { type, payload }) => {
         todos: todosList,
         requestState: RequestStates.success,
         todosListError: null,
+        responseMessage: 'Todo removed successflly',
         // todos: state.todos.map(todo => (todo.id === payload
         // ? { ...todo, isRemoved: true } : todos)) to soft delete,
       };
@@ -73,6 +79,7 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         requestState: RequestStates.error,
         todosListError: 'Unknown error',
+        responseMessage: 'Remove todo failed',
       };
     }
 
@@ -81,6 +88,7 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         requestState: RequestStates.loading,
         todosListError: null,
+        responseMessage: '',
       };
     case actionTypes.GET_TODOS_LIST_SUCCESS: {
       const todosList = payload.data;
@@ -90,6 +98,7 @@ export default (state = initialState, { type, payload }) => {
         todos: todosList,
         requestState: RequestStates.success,
         todosListError: null,
+        responseMessage: '',
       };
     }
     case actionTypes.GET_TODOS_LIST_ERROR:
@@ -97,6 +106,7 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         requestState: RequestStates.error,
         todosListError: 'Unknown error',
+        responseMessage: '',
       };
 
     case actionTypes.CHECK_TODO_LOADING:
@@ -104,6 +114,7 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         requestState: RequestStates.loading,
         todosListError: null,
+        responseMessage: '',
       };
     case actionTypes.CHECK_TODO_SUCCESS: {
       const todosList = state.todos.map(todo => (todo.id === payload.data.id
@@ -116,6 +127,7 @@ export default (state = initialState, { type, payload }) => {
         todos: todosList,
         requestState: RequestStates.success,
         todosListError: null,
+        responseMessage: 'Todo moved successfully',
       };
     }
     case actionTypes.CHECK_TODO_ERROR:
@@ -123,23 +135,19 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         requestState: RequestStates.error,
         todosListError: 'Unknown error',
+        responseMessage: '',
+      };
+    case actionTypes.FLUSH_TODOS_LIST:
+      return {
+        ...state,
+        todos: [],
       };
 
-    // case actionTypes.CHECK_TODO: {
-    //   const doneTodo = state.todos.map(todo => (todo.id === payload.id
-    //     ? { ...todo, isDone: payload.isChecked }
-    //     : todo));
-    //   localStorage.setItem('todo', JSON.stringify(doneTodo));
-    //   return {
-    //     ...state,
-    //     todos: doneTodo,
-    //     // todos: state.todos.filter(todo => todo.id !== payload),
-    //   };
-    // }
     case actionTypes.CHANGE_SELECTED_TAB:
       return {
         ...state,
         selectedTab: payload,
+        responseMessage: '',
       };
     case actionTypes.OPEN_DIALOG:
       return {
@@ -148,12 +156,14 @@ export default (state = initialState, { type, payload }) => {
           ...state.currentDialogNames,
           payload,
         ],
+        responseMessage: '',
       };
     case actionTypes.CLOSE_DIALOG:
       return {
         ...state,
         currentDialogNames: state.currentDialogNames
           .filter(dialogName => dialogName !== payload),
+        responseMessage: '',
       };
     default:
       return state;

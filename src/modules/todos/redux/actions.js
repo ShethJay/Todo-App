@@ -40,8 +40,13 @@ export const closeDialog = dialogName => ({
 
 export const getTodosList = () => ({
   type: actionTypes.GET_TODOS_LIST,
-  payload: api.get('/todos'),
+  payload: api.get('/todos?page=1&limit=10'),
 });
+
+export const flushTodosList = () => ({
+  type: actionTypes.FLUSH_TODOS_LIST,
+});
+
 
 // export const updateTodo = (id, todo) => ({
 //   type: actionTypes.UPDATE_TODO,
