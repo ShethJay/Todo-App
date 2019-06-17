@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { toast } from 'react-toastify';
 
 import TodosList from './TodosList';
 import * as actions from '../../redux/actions';
@@ -17,7 +18,7 @@ class TodosListCotainer extends Component {
 
   componentDidMount() {
     const { getTodosList } = this.props;
-    getTodosList();
+    getTodosList(2);
   }
 
   componentWillUnmount() {
@@ -49,8 +50,11 @@ class TodosListCotainer extends Component {
       loading,
       responseMessage,
     } = this.props;
+
     if (responseMessage !== '') {
-      alert(responseMessage);
+      toast.info(responseMessage, {
+        position: toast.POSITION.BOTTOM_CENTER,
+      });
     }
     return (
       <TodosList
@@ -92,7 +96,7 @@ const mapStateToProps = state => ({
 const mapDisptachToProps = dispatch => ({
   removeTodo: id => dispatch(actions.removeTodo(id)),
   checkTodo: (id, isChecked) => dispatch(actions.checkTodo(id, isChecked)),
-  getTodosList: () => dispatch(actions.getTodosList()),
+  getTodosList: page => dispatch(actions.getTodosList(page)),
   flushTodosList: () => dispatch(actions.flushTodosList()),
   // updateTodo: (id, todo) => dispatch(actions.updateTodo(id, todo)),
 });
