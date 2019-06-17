@@ -1,8 +1,7 @@
 @import 'variabels';
 
-@import 'todos';
-@import 'header';
-@import 'add-todo';
-@import 'todos-list';
-@import 'add-todo-input';
-@import 'footer';
+@import '0-plugins/exports';
+@import '1-base/exports';
+@import '2-layouts/exports';
+@import '3-modules/exports';
+

@@ -7,7 +7,7 @@ import Tab from '@material-ui/core/Tab';
 import { noop } from '../../../../utils';
 
 const Header = ({ selectedTab, handleChange }) => (
-  <AppBar position="static" color="default">
+  <AppBar position="static" color="default" className="todo-header">
     <Tabs
       value={selectedTab}
       onChange={handleChange}

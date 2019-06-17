@@ -1,0 +1,44 @@
+.todos-list-block-ui {
+  height: calc(100% - 85px);
+}
+.todos-list {
+  height: 100%;
+  overflow-y: scroll;
+
+  .todos-row {
+    &:hover {
+      background-color: $background-color-300;
+    }
+
+    .remove-padding {
+      padding: 0;
+
+      &.todos-done-checkbox {
+        width: 45px;
+
+        > span {
+          color: $todos-color;
+        }
+      }
+
+      &.todos-title-input {
+        > p {
+          width: 210px;
+          word-wrap: break-word;
+          font-family: $font-family;
+          font-size: 1.15rem;
+        }
+      }
+
+      &.todos-delete-button {
+        > button {
+          color: $todos-color;
+          &:hover {
+            background-color: $todos-color;
+            color: $primary-color;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+.todos-container {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+  .todos {
+    width: 330px;
+    height: calc(100% - 180px);
+    background-color: $light-background;
+    position: relative;
+    margin: $standard-margin * 10 auto;
+    border-radius: $border-radius * 4;
+    overflow: hidden;
+    box-shadow: 7px 7px 20px -12px rgba(0, 0, 0, 1);
+  }
+}
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}

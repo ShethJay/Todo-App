@@ -1,0 +1,10 @@
+.footer{
+  display: flex;
+  text-align: center;
+  .footer-line {
+    width: 50%;
+    border: 0;
+    border-bottom: 4px solid $background-color-600;
+    border-radius: $border-radius * 2;
+  }
+}

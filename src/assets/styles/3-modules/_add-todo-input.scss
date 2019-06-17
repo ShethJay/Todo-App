@@ -2,17 +2,18 @@
   text-align: center;
 
   .add-todo-input {
-    margin-bottom: 10px;
+    margin-bottom: $standard-margin;
 
     input {
-      font-size: 20px;
+      font-size: 1rem;
     }
   }
 
   .add-todo-button {
-    background-color: $primary-color;
+    background-color: $todos-color;
     color: $light-background;
-    font-size: 18px;
+    font-size: 1rem;
     font-weight: 600;
+    font-family: $font-family;
   }
 }

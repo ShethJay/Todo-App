@@ -1,18 +1,26 @@
 import * as actionTypes from './actionTypes';
+import api from '../../../utils/api';
 
 export const addTodo = title => ({
   type: actionTypes.ADD_TODO,
-  payload: title,
+  payload: api.post('/todos/',
+    {
+      id: +new Date(),
+      title,
+      isDone: false,
+    }),
 });
 
 export const removeTodo = id => ({
   type: actionTypes.REMOVE_TODO,
-  payload: id,
+  payload: api.delete(`/todos/${id}`),
 });
 
-export const checkTodo = (id, isChecked) => ({
+export const checkTodo = (id, isChekded) => ({
   type: actionTypes.CHECK_TODO,
-  payload: { id, isChecked },
+  payload: api.put(`/todos/${id}`, {
+    isDone: isChekded,
+  }),
 });
 
 export const changeSelectedTab = tabValue => ({
@@ -30,6 +38,10 @@ export const closeDialog = dialogName => ({
   payload: dialogName,
 });
 
+export const getTodosList = () => ({
+  type: actionTypes.GET_TODOS_LIST,
+  payload: api.get('/todos'),
+});
 
 // export const updateTodo = (id, todo) => ({
 //   type: actionTypes.UPDATE_TODO,

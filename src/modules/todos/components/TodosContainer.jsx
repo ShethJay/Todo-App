@@ -1,12 +1,21 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import Todos from './Todos';
 
-const TodosContainer = ({ todos, selectedTab }) => (
-  <Todos selectedTab={selectedTab} todos={todos} />
-);
+class TodosContainer extends Component {
+  componentDidMount() {
+
+  }
+
+  render() {
+    const { selectedTab, todos } = this.props;
+    return (
+      <Todos selectedTab={selectedTab} todos={todos} />
+    );
+  }
+}
 
 TodosContainer.propTypes = {
   todos: PropTypes.arrayOf(PropTypes.object),

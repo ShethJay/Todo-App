@@ -4,15 +4,15 @@
   right: 20px;
 
   > button {
-    background-color: $primary-color;
+    background-color: $todos-color;
 
     &:hover {
-      background-color: $primary-color;
+      background-color: $todos-color;
     }
 
     > span {
       > svg {
-        font-size: 45px;
+        font-size: 3rem;
       }
     }
   }

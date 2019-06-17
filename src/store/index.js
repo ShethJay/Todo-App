@@ -1,4 +1,6 @@
-import { createStore, compose, applyMiddleware } from 'redux';
+import { createPromise } from 'redux-promise-middleware';
+import { createStore, applyMiddleware, compose } from 'redux';
+import thunkMiddleware from 'redux-thunk';
 import rootReducer from './rootReducer';
 // import { loadState, saveState } from './localStorage';
 
@@ -6,9 +8,11 @@ import rootReducer from './rootReducer';
 
 const reduxStore = createStore(
   rootReducer,
-  {},
   compose(
-    applyMiddleware(),
+    applyMiddleware(
+      thunkMiddleware,
+      createPromise({ promiseTypeSuffixes: ['LOADING', 'SUCCESS', 'ERROR'] }),
+    ),
     window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f,
   ),
 );

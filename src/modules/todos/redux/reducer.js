@@ -1,4 +1,5 @@
 import * as actionTypes from './actionTypes';
+import RequestStates from '../../../utils/request-states';
 
 const localInitialState = localStorage.getItem('todo');
 let localState = [];
@@ -10,48 +11,131 @@ const initialState = {
   todos: localState,
   selectedTab: 0,
   currentDialogNames: [],
+  requestState: RequestStates.init,
+  todosListError: null,
+
 };
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
-    case actionTypes.ADD_TODO: {
-      const addTodo = [
-        ...state.todos,
-        {
-          id: +new Date(),
-          title: payload,
-          isDone: false,
-        },
-      ];
-      localStorage.setItem('todo', JSON.stringify(addTodo));
+    case actionTypes.ADD_TODO_LOADING: {
       return {
         ...state,
-        todos: addTodo,
+        requestState: RequestStates.loading,
+        todosListError: null,
       };
     }
-    case actionTypes.REMOVE_TODO: {
-      const removedTodo = state.todos.filter(todo => todo.id !== payload);
-      localStorage.setItem('todo', JSON.stringify(removedTodo));
-
+    case actionTypes.ADD_TODO_SUCCESS: {
+      const todosList = [
+        ...state.todos,
+        {
+          id: payload.data.id,
+          title: payload.data.title,
+          isDone: payload.data.isDone,
+        }];
+      localStorage.setItem('todo', JSON.stringify(todosList));
       return {
         ...state,
-        todos: removedTodo,
+        todos: todosList,
+        requestState: RequestStates.success,
+        todosListError: null,
+      };
+    }
+    case actionTypes.ADD_TODO_ERROR: {
+      return {
+        ...state,
+        requestState: RequestStates.error,
+        todosListError: 'Unknown error',
+      };
+    }
+
+    case actionTypes.REMOVE_TODO_LOADING: {
+      return {
+        ...state,
+        requestState: RequestStates.loading,
+        todosListError: null,
+      };
+    }
+    case actionTypes.REMOVE_TODO_SUCCESS: {
+      const todosList = state.todos.filter(todo => todo.id !== payload.data.id);
+      localStorage.setItem('todo', JSON.stringify(todosList));
+      return {
+        ...state,
+        todos: todosList,
+        requestState: RequestStates.success,
+        todosListError: null,
         // todos: state.todos.map(todo => (todo.id === payload
         // ? { ...todo, isRemoved: true } : todos)) to soft delete,
       };
     }
-    case actionTypes.CHECK_TODO: {
-      const doneTodo = state.todos.map(todo => (todo.id === payload.id
-        ? { ...todo, isDone: payload.isChecked }
-        : todo));
-      localStorage.setItem('todo', JSON.stringify(doneTodo));
-
+    case actionTypes.REMOVE_TODO_ERROR: {
       return {
         ...state,
-        todos: doneTodo,
-        // todos: state.todos.filter(todo => todo.id !== payload),
+        requestState: RequestStates.error,
+        todosListError: 'Unknown error',
       };
     }
+
+    case actionTypes.GET_TODOS_LIST_LOADING:
+      return {
+        ...state,
+        requestState: RequestStates.loading,
+        todosListError: null,
+      };
+    case actionTypes.GET_TODOS_LIST_SUCCESS: {
+      const todosList = payload.data;
+      localStorage.setItem('todo', JSON.stringify(todosList));
+      return {
+        ...state,
+        todos: todosList,
+        requestState: RequestStates.success,
+        todosListError: null,
+      };
+    }
+    case actionTypes.GET_TODOS_LIST_ERROR:
+      return {
+        ...state,
+        requestState: RequestStates.error,
+        todosListError: 'Unknown error',
+      };
+
+    case actionTypes.CHECK_TODO_LOADING:
+      return {
+        ...state,
+        requestState: RequestStates.loading,
+        todosListError: null,
+      };
+    case actionTypes.CHECK_TODO_SUCCESS: {
+      const todosList = state.todos.map(todo => (todo.id === payload.data.id
+        ? {
+          ...todo, isDone: payload.data.isDone,
+        } : todo));
+      localStorage.setItem('todo', JSON.stringify(todosList));
+      return {
+        ...state,
+        todos: todosList,
+        requestState: RequestStates.success,
+        todosListError: null,
+      };
+    }
+    case actionTypes.CHECK_TODO_ERROR:
+      return {
+        ...state,
+        requestState: RequestStates.error,
+        todosListError: 'Unknown error',
+      };
+
+    // case actionTypes.CHECK_TODO: {
+    //   const doneTodo = state.todos.map(todo => (todo.id === payload.id
+    //     ? { ...todo, isDone: payload.isChecked }
+    //     : todo));
+    //   localStorage.setItem('todo', JSON.stringify(doneTodo));
+    //   return {
+    //     ...state,
+    //     todos: doneTodo,
+    //     // todos: state.todos.filter(todo => todo.id !== payload),
+    //   };
+    // }
     case actionTypes.CHANGE_SELECTED_TAB:
       return {
         ...state,

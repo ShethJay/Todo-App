@@ -1,7 +1,9 @@
 import React from 'react';
 
 const Footer = () => (
-  <hr className="hr-line" />
+  <div className="footer">
+    <hr className="footer-line" />
+  </div>
 );
 
 export default Footer;
