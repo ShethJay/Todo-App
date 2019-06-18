@@ -17,6 +17,7 @@ const initialState = {
   todosListPageNo: 1,
   todosListPageSize: 10,
   totalRecords: 0,
+  paginationType: 1,
 
 };
 

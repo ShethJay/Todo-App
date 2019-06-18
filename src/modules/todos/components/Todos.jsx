@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Pagination from 'material-ui-flat-pagination';
 
 import HeaderContainer from './header-section/HeaderContainer';
 import TodosListContainer from './todos-list-section/TodosListContainer';
@@ -14,6 +15,8 @@ const Todos = ({
   onChangeActivePage,
   totalRecords,
   activePage,
+  handleClick,
+  paginationType,
 }) => (
   <div className="todos-container">
     <div className="todos">
@@ -26,11 +29,22 @@ const Todos = ({
         }
       />
       <AddTodosContainer />
-      <PaginationContainer
-        onChangeActivePage={onChangeActivePage}
-        totalRecords={totalRecords}
-        activePage={activePage}
-      />
+      {paginationType === 0
+        ? (
+          <PaginationContainer
+            onChangeActivePage={onChangeActivePage}
+            totalRecords={totalRecords}
+            activePage={activePage}
+          />
+        )
+        : (
+          <Pagination
+            limit={10}
+            offset={(activePage - 1) * 10}
+            total={totalRecords}
+            onClick={(e, offset, page) => handleClick(offset, page)}
+          />
+        )}
       <FooterContainer />
     </div>
   </div>
@@ -42,6 +56,8 @@ Todos.propTypes = {
   onChangeActivePage: PropTypes.func,
   totalRecords: PropTypes.number,
   activePage: PropTypes.number,
+  handleClick: PropTypes.func,
+  paginationType: PropTypes.number,
 };
 
 Todos.defaultProps = {
@@ -50,6 +66,8 @@ Todos.defaultProps = {
   onChangeActivePage: noop,
   totalRecords: 0,
   activePage: 1,
+  handleClick: noop,
+  paginationType: 0,
 };
 
 export default Todos;
