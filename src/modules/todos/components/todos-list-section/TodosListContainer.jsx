@@ -17,8 +17,9 @@ class TodosListCotainer extends Component {
   }
 
   componentDidMount() {
-    const { getTodosList } = this.props;
-    getTodosList(2);
+    const { getTodosList, getTodosListByPage, pageNo } = this.props;
+    getTodosList();
+    getTodosListByPage(pageNo);
   }
 
   componentWillUnmount() {
@@ -27,8 +28,8 @@ class TodosListCotainer extends Component {
   }
 
   onDeleteTodo(id) {
-    const { removeTodo } = this.props;
-    removeTodo(id);
+    const { deleteTodo } = this.props;
+    deleteTodo(id);
     // this.onUpdateTodo(id);
   }
 
@@ -50,12 +51,12 @@ class TodosListCotainer extends Component {
       loading,
       responseMessage,
     } = this.props;
-
     if (responseMessage !== '') {
       toast.info(responseMessage, {
         position: toast.POSITION.BOTTOM_CENTER,
       });
     }
+
     return (
       <TodosList
         todos={todos}
@@ -68,36 +69,42 @@ class TodosListCotainer extends Component {
 }
 
 TodosListCotainer.propTypes = {
-  removeTodo: PropTypes.func,
+  deleteTodo: PropTypes.func,
   checkTodo: PropTypes.func,
   todos: PropTypes.instanceOf(Object),
   getTodosList: PropTypes.func,
   loading: PropTypes.bool,
   flushTodosList: PropTypes.func,
   responseMessage: PropTypes.string,
+  pageNo: PropTypes.number,
+  getTodosListByPage: PropTypes.func,
 };
 
 TodosListCotainer.defaultProps = {
-  removeTodo: noop,
+  deleteTodo: noop,
   checkTodo: noop,
   todos: {},
   getTodosList: noop,
   loading: false,
   flushTodosList: noop,
   responseMessage: '',
+  pageNo: 1,
+  getTodosListByPage: noop,
 };
 
 const mapStateToProps = state => ({
   loading: state.todo.requestState === RequestStates.loading,
   isRequestSuccess: state.todo.requestState === RequestStates.success,
   responseMessage: state.todo.responseMessage,
+  pageNo: state.todo.todosListPageNo,
 });
 
 const mapDisptachToProps = dispatch => ({
-  removeTodo: id => dispatch(actions.removeTodo(id)),
+  deleteTodo: id => dispatch(actions.deleteTodo(id)),
   checkTodo: (id, isChecked) => dispatch(actions.checkTodo(id, isChecked)),
   getTodosList: page => dispatch(actions.getTodosList(page)),
   flushTodosList: () => dispatch(actions.flushTodosList()),
+  getTodosListByPage: pageNo => dispatch(actions.getTodosListByPage(pageNo)),
   // updateTodo: (id, todo) => dispatch(actions.updateTodo(id, todo)),
 });
 

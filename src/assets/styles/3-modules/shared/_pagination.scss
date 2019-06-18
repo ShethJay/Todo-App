@@ -1,0 +1,10 @@
+.pagination {
+  .pagination-button {
+    font-family: $font-family;
+    font-size: 1rem;
+    &.active {
+      background-color: $todos-color;
+      color: $primary-color;
+    }
+  }
+}

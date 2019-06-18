@@ -14,11 +14,68 @@ const initialState = {
   requestState: RequestStates.init,
   todosListError: null,
   responseMessage: '',
+  todosListPageNo: 1,
+  todosListPageSize: 10,
+  totalRecords: 0,
 
 };
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
+    case actionTypes.GET_TODOS_LIST_LOADING:
+      return {
+        ...state,
+        requestState: RequestStates.loading,
+        todosListError: null,
+        responseMessage: '',
+      };
+    case actionTypes.GET_TODOS_LIST_SUCCESS: {
+      const todosList = payload.data;
+      // localStorage.setItem('todo', JSON.stringify(todosList));
+      return {
+        ...state,
+        requestState: RequestStates.success,
+        todosListError: null,
+        responseMessage: '',
+        totalRecords: todosList.length,
+      };
+    }
+    case actionTypes.GET_TODOS_LIST_ERROR:
+      return {
+        ...state,
+        requestState: RequestStates.error,
+        todosListError: 'Unknown error',
+        responseMessage: '',
+      };
+
+    case actionTypes.GET_TODOS_LIST_BY_PAGE_LOADING:
+      return {
+        ...state,
+        requestState: RequestStates.loading,
+        todosListError: null,
+        responseMessage: '',
+      };
+    case actionTypes.GET_TODOS_LIST_BY_PAGE_SUCCESS: {
+      const todosList = payload.data;
+      localStorage.setItem('todo', JSON.stringify(todosList));
+      return {
+        ...state,
+        todos: todosList,
+        requestState: RequestStates.success,
+        todosListError: null,
+        responseMessage: '',
+        todosListPageNo: payload.page,
+        todosListPageSize: payload.limit,
+      };
+    }
+    case actionTypes.GET_TODOS_LIST_BY_PAGE_ERROR:
+      return {
+        ...state,
+        requestState: RequestStates.error,
+        todosListError: 'Unknown error',
+        responseMessage: '',
+      };
+
     case actionTypes.ADD_TODO_LOADING: {
       return {
         ...state,
@@ -53,7 +110,7 @@ export default (state = initialState, { type, payload }) => {
       };
     }
 
-    case actionTypes.REMOVE_TODO_LOADING: {
+    case actionTypes.DELETE_TODO_LOADING: {
       return {
         ...state,
         requestState: RequestStates.loading,
@@ -61,7 +118,7 @@ export default (state = initialState, { type, payload }) => {
         responseMessage: '',
       };
     }
-    case actionTypes.REMOVE_TODO_SUCCESS: {
+    case actionTypes.DELETE_TODO_SUCCESS: {
       const todosList = state.todos.filter(todo => todo.id !== payload.data.id);
       localStorage.setItem('todo', JSON.stringify(todosList));
       return {
@@ -74,7 +131,7 @@ export default (state = initialState, { type, payload }) => {
         // ? { ...todo, isRemoved: true } : todos)) to soft delete,
       };
     }
-    case actionTypes.REMOVE_TODO_ERROR: {
+    case actionTypes.DELETE_TODO_ERROR: {
       return {
         ...state,
         requestState: RequestStates.error,
@@ -83,31 +140,6 @@ export default (state = initialState, { type, payload }) => {
       };
     }
 
-    case actionTypes.GET_TODOS_LIST_LOADING:
-      return {
-        ...state,
-        requestState: RequestStates.loading,
-        todosListError: null,
-        responseMessage: '',
-      };
-    case actionTypes.GET_TODOS_LIST_SUCCESS: {
-      const todosList = payload.data;
-      localStorage.setItem('todo', JSON.stringify(todosList));
-      return {
-        ...state,
-        todos: todosList,
-        requestState: RequestStates.success,
-        todosListError: null,
-        responseMessage: '',
-      };
-    }
-    case actionTypes.GET_TODOS_LIST_ERROR:
-      return {
-        ...state,
-        requestState: RequestStates.error,
-        todosListError: 'Unknown error',
-        responseMessage: '',
-      };
 
     case actionTypes.CHECK_TODO_LOADING:
       return {

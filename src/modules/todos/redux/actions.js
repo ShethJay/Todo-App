@@ -11,8 +11,8 @@ export const addTodo = title => ({
     }),
 });
 
-export const removeTodo = id => ({
-  type: actionTypes.REMOVE_TODO,
+export const deleteTodo = id => ({
+  type: actionTypes.DELETE_TODO,
   payload: api.delete(`/todos/${id}`),
 });
 
@@ -40,7 +40,13 @@ export const closeDialog = dialogName => ({
 
 export const getTodosList = () => ({
   type: actionTypes.GET_TODOS_LIST,
-  payload: api.get('/todos?page=1&limit=10'),
+  payload: api.get('/todos'),
+});
+
+export const getTodosListByPage = (page = 1, limit = 10) => ({
+  type: actionTypes.GET_TODOS_LIST_BY_PAGE,
+  payload: api.get(`/todos?page=${page}&limit=${limit}`)
+    .then(res => ({ data: res.data, page, limit })),
 });
 
 export const flushTodosList = () => ({
