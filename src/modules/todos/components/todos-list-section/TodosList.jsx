@@ -12,23 +12,42 @@ import BlockUI from 'react-block-ui';
 
 import { noop } from '../../../../utils/index';
 import GoogleLoader from '../../../../shared/components/GoogleLoader';
+import InfiniteScrollContainer from '../../../../shared/components/InfiniteScroll/InfiniteScrollContainer';
 
 const TodosList = ({
   todos,
   onCheckTodo,
   onDeleteTodo,
   loading,
+  pageNo,
+  pageSize,
+  total,
+  flushTodosList,
+  getTodosListByPage,
+  getTodosList,
+
 }) => (
   <BlockUI
     tag="div"
-    blocking={loading}
+    blocking={loading && todos.length === 0}
     loader={<GoogleLoader height={50} width={50} />}
     className="todos-list-block-ui"
   >
     <div className="todos-list">
-      <Table size="small">
-        <TableBody>
-          {todos.length > 0
+      <InfiniteScrollContainer
+        items={todos}
+        flushItems={flushTodosList}
+        getItems={getTodosListByPage}
+        getItemsTotal={getTodosList}
+        loading={loading}
+        noDataMessage="No data available"
+        pageNo={pageNo}
+        pageSize={pageSize}
+        total={total}
+      >
+        <Table size="small">
+          <TableBody>
+            {todos.length > 0
             && todos
               .map(todo => (
                 <TableRow key={todo.id} className="todos-row">
@@ -61,8 +80,9 @@ const TodosList = ({
                   </TableCell>
                 </TableRow>
               ))}
-        </TableBody>
-      </Table>
+          </TableBody>
+        </Table>
+      </InfiniteScrollContainer>
     </div>
   </BlockUI>
 );
@@ -72,6 +92,12 @@ TodosList.propTypes = {
   onDeleteTodo: PropTypes.func,
   todos: PropTypes.instanceOf(Object),
   loading: PropTypes.bool,
+  pageNo: PropTypes.number,
+  pageSize: PropTypes.number,
+  total: PropTypes.number,
+  flushTodosList: PropTypes.func,
+  getTodosListByPage: PropTypes.func,
+  getTodosList: PropTypes.func,
 };
 
 TodosList.defaultProps = {
@@ -79,6 +105,12 @@ TodosList.defaultProps = {
   onDeleteTodo: noop,
   todos: {},
   loading: false,
+  pageNo: 1,
+  pageSize: 1,
+  total: 0,
+  flushTodosList: noop,
+  getTodosListByPage: noop,
+  getTodosList: noop,
 };
 
 export default TodosList;

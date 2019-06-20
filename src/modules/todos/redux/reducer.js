@@ -35,6 +35,7 @@ export default (state = initialState, { type, payload }) => {
       // localStorage.setItem('todo', JSON.stringify(todosList));
       return {
         ...state,
+        // todos: todosList,
         requestState: RequestStates.success,
         todosListError: null,
         responseMessage: '',
@@ -61,7 +62,7 @@ export default (state = initialState, { type, payload }) => {
       localStorage.setItem('todo', JSON.stringify(todosList));
       return {
         ...state,
-        todos: todosList,
+        todos: [...state.todos, ...todosList],
         requestState: RequestStates.success,
         todosListError: null,
         responseMessage: '',

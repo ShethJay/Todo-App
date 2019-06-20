@@ -13,43 +13,30 @@ class TodosListCotainer extends Component {
     super(props);
     this.onDeleteTodo = this.onDeleteTodo.bind(this);
     this.onCheckTodo = this.onCheckTodo.bind(this);
-    // this.onUpdateTodo = this.onUpdateTodo.bind(this);
-  }
-
-  componentDidMount() {
-    const { getTodosList, getTodosListByPage, pageNo } = this.props;
-    getTodosList();
-    getTodosListByPage(pageNo);
-  }
-
-  componentWillUnmount() {
-    const { flushTodosList } = this.props;
-    flushTodosList();
   }
 
   onDeleteTodo(id) {
     const { deleteTodo } = this.props;
     deleteTodo(id);
-    // this.onUpdateTodo(id);
   }
 
   onCheckTodo(e, id) {
     const { checked } = e.target;
     const { checkTodo } = this.props;
     checkTodo(id, checked);
-    // this.onUpdateTodo(id, { isDone: checked });
   }
-
-  // onUpdateTodo(id, todo) {
-  //   const { updateTodo } = this.props;
-  //   updateTodo(id, todo);
-  // }
 
   render() {
     const {
       todos,
       loading,
       responseMessage,
+      pageNo,
+      pageSize,
+      total,
+      flushTodosList,
+      getTodosListByPage,
+      getTodosList,
     } = this.props;
     if (responseMessage !== '') {
       toast.info(responseMessage, {
@@ -63,6 +50,12 @@ class TodosListCotainer extends Component {
         onCheckTodo={this.onCheckTodo}
         onDeleteTodo={this.onDeleteTodo}
         loading={loading}
+        pageNo={pageNo}
+        pageSize={pageSize}
+        total={total}
+        flushTodosList={flushTodosList}
+        getTodosListByPage={getTodosListByPage}
+        getTodosList={getTodosList}
       />
     );
   }
@@ -72,24 +65,28 @@ TodosListCotainer.propTypes = {
   deleteTodo: PropTypes.func,
   checkTodo: PropTypes.func,
   todos: PropTypes.instanceOf(Object),
-  getTodosList: PropTypes.func,
   loading: PropTypes.bool,
-  flushTodosList: PropTypes.func,
   responseMessage: PropTypes.string,
   pageNo: PropTypes.number,
+  pageSize: PropTypes.number,
+  total: PropTypes.number,
+  flushTodosList: PropTypes.func,
   getTodosListByPage: PropTypes.func,
+  getTodosList: PropTypes.func,
 };
 
 TodosListCotainer.defaultProps = {
   deleteTodo: noop,
   checkTodo: noop,
   todos: {},
-  getTodosList: noop,
   loading: false,
-  flushTodosList: noop,
   responseMessage: '',
   pageNo: 1,
+  pageSize: 1,
+  total: 0,
+  flushTodosList: noop,
   getTodosListByPage: noop,
+  getTodosList: noop,
 };
 
 const mapStateToProps = state => ({
@@ -97,15 +94,16 @@ const mapStateToProps = state => ({
   isRequestSuccess: state.todo.requestState === RequestStates.success,
   responseMessage: state.todo.responseMessage,
   pageNo: state.todo.todosListPageNo,
+  pageSize: state.todo.todosListPageSize,
+  total: state.todo.totalRecords,
 });
 
 const mapDisptachToProps = dispatch => ({
   deleteTodo: id => dispatch(actions.deleteTodo(id)),
   checkTodo: (id, isChecked) => dispatch(actions.checkTodo(id, isChecked)),
-  getTodosList: page => dispatch(actions.getTodosList(page)),
   flushTodosList: () => dispatch(actions.flushTodosList()),
   getTodosListByPage: pageNo => dispatch(actions.getTodosListByPage(pageNo)),
-  // updateTodo: (id, todo) => dispatch(actions.updateTodo(id, todo)),
+  getTodosList: pageNo => dispatch(actions.getTodosList(pageNo)),
 });
 
 export default connect(mapStateToProps, mapDisptachToProps)(TodosListCotainer);

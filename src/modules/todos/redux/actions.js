@@ -5,7 +5,7 @@ export const addTodo = title => ({
   type: actionTypes.ADD_TODO,
   payload: api.post('/todos/',
     {
-      id: +new Date(),
+      // id: +new Date(),
       title,
       isDone: false,
     }),

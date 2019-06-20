@@ -1,0 +1,13 @@
+.infinite-sensor {
+  height: 20px;
+  width: 100%;
+  display: flex;
+  margin: 10px 0;
+  span {
+    height: 20px;
+    flex: 1;
+  }
+  // @media(max-width: 1024px) {
+  //   zoom: 2;
+  // }
+}

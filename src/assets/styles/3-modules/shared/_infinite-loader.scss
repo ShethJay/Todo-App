@@ -1,0 +1,46 @@
+.infinite-scroll-wrapper {
+  height: 100%;
+  
+  .no-data {
+    width: 100%;
+    text-align: center;
+    padding: $standard-padding * 8;
+  }
+
+  .infinite-scroll-header {
+    font-size: 0.8rem;
+    margin: 0 $standard-margin * 2 $standard-margin * 2;
+  }
+
+  .pagination {
+    display: flex;
+    justify-content: flex-end;
+    margin: 0 $standard-margin;
+  }
+
+  .infinite-loader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    width: 100%;
+    margin: 20px 0;
+    position: relative;
+  }
+
+  .btn-load-more-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+   }
+}
+
+.full-min-height {
+  min-height: 100%;
+}
+.full-height {
+  height: 100%;
+}

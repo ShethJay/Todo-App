@@ -29,7 +29,7 @@ const Todos = ({
         }
       />
       <AddTodosContainer />
-      {paginationType === 0
+      {/* {paginationType === 0
         ? (
           <PaginationContainer
             onChangeActivePage={onChangeActivePage}
@@ -38,13 +38,13 @@ const Todos = ({
           />
         )
         : (
-          <Pagination
+          <Pagination // material-ui-flat-pagination
             limit={10}
             offset={(activePage - 1) * 10}
             total={totalRecords}
             onClick={(e, offset, page) => handleClick(offset, page)}
           />
-        )}
+        )} */}
       <FooterContainer />
     </div>
   </div>
